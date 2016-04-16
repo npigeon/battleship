@@ -1,7 +1,7 @@
 package battleship;
 import java.util.ArrayList;
 import java.util.List;
-import java.io.File;
+import java.io.*;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 
@@ -30,19 +30,33 @@ public class Grid {
     }
 
     public boolean loadGame(String saveName){
-    	String saveDir="TBD";
-    	File fileHandler = new File(saveDir);
-    	FileWriter output = new FileWriter(fileHandler);
-    	BufferedWriter outputWrapper = new BufferedWriter(output);
-    	int gameWidth=this.getWidth();
-    	int gameHeight=this.getHeight();
-    	for(int squareX=0;squareX<gameWidth;squareX++){
-    		for(int squareY=0;squareY<gameHeight;squareY++){
-                    int pass = 1;
-    		}
-    	}
+        String saveFileName="TBD";
+        BufferedWriter outputWrapper = null;
+        try {
+            FileWriter writeHandler = new FileWriter(saveFileName);
+            outputWrapper = new BufferedWriter(writeHandler);
+            int gameWidth=this.getWidth();
+            int gameHeight=this.getHeight();
+            for(int squareX=0;squareX<gameWidth;squareX++){
+                    for(int squareY=0;squareY<gameHeight;squareY++){
+                        int pass = 1;
+                    }
+            }
+        }
+        catch (IOException ex){
+            System.out.println (ex.toString());
+            System.out.println("Could not find file " + saveFileName);
+        } finally {
+             try {
+                outputWrapper.close();
+            } catch (Exception ex) {
+                System.out.println (ex.toString());
+                System.out.println("Could not close file " + saveFileName);
+            }
+        }
     	return false;
     }
+    
     public boolean saveGame(String saveName){
         return false;
     }
