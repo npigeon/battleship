@@ -8,5 +8,7 @@ public class Column {
     public Column(int gridHeight) {
         for (int squareY=0; squareY<gridHeight; squareY++) {
             squares.add(new Square());
+            }
+    }
 
 }

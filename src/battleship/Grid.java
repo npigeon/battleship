@@ -1,4 +1,11 @@
 package battleship;
+import java.util.ArrayList;
+import java.util.List;
+import java.io.File;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+
+
 
 public class Grid {
     public List<Column> columns = new ArrayList<Column>();
@@ -23,18 +30,20 @@ public class Grid {
     }
 
     public boolean loadGame(String saveName){
-    	saveDir="TBD";
-    	FileWriter output = new FileWriter(saveDir);
+    	String saveDir="TBD";
+    	File fileHandler = new File(saveDir);
+    	FileWriter output = new FileWriter(fileHandler);
     	BufferedWriter outputWrapper = new BufferedWriter(output);
-    	gameWidth=this.getWidth();
-    	gameHeight=this.getHeight();
+    	int gameWidth=this.getWidth();
+    	int gameHeight=this.getHeight();
     	for(int squareX=0;squareX<gameWidth;squareX++){
-    		for(nt squareY=0;squareY<gameHeight;squareY++){
-
+    		for(int squareY=0;squareY<gameHeight;squareY++){
+                    int pass = 1;
     		}
     	}
+    	return false;
     }
     public boolean saveGame(String saveName){
-
+        return false;
     }
 }
