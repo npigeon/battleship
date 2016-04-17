@@ -1,4 +1,4 @@
-public class SaveInterpreter(){
+public class SaveInterpreter{
 	public int gridWidth;
 	public int gridHeight;
 	

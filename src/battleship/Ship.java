@@ -147,7 +147,7 @@ public class Ship{
 		
 		for(Coordinates shipSegLoc:shipLocation){  //tests if all entries have the same solumn entry
 			if(shipSegLoc.getX()!=possibleCol){
-				valid=false
+				valid=false;
 				break;
 			}
 		}
