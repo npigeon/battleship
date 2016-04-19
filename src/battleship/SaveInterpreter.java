@@ -73,7 +73,7 @@ public class SaveInterpreter{
     			
     			currSquareEnum = this.enumerateSquare(squareX,squareY);
     		    currSquareStatus=gameGrid.getSquare(squareX,squareY).getGuessMult();
-    			// <<code for connverting result of getDisplay character to -1 for miss, 0 for unguessed, 1 for hit goes here>>
+    		
     			
     			codedEnum=currSquareStatus*currSquareEnum;
     			if  (codedEnum!=0){
@@ -101,16 +101,22 @@ public class SaveInterpreter{
     }
     
     public String enemyGuessString(Grid gameGrid){
+    	String outputString="";
     	for(Integer squareY=0;squareY<gridHeight;squareY++){
     		for(Integer squareX=1;squareX<gridWidth;squareX++){
-    			if(gameGrid.getSquare(squareX, squareY).){
-    				
+    			if(gameGrid.getSquare(squareX, squareY).checkForEnemyShot()){
+    				outputString+=this.enumerateSquare(squareX,squareY);
+    				outputString+=",";
     			}
     		}
     	}
+    	if(outputString.length()>0){  //truncates extra , at end if string has positive length
+    		outputString.substring(0, outputString.length()-1); 
+    	}
+    	return "";
     }
     
-	public void formatSave(Grid gameGrid, List<Ship> ownFleet){
+	public List<String> formatSave(Grid gameGrid, List<Ship> ownFleet){
 		//formats gamestate into a list of 4 strings
 		List<String> outputRows = new ArrayList<String>();
 		
@@ -133,8 +139,40 @@ public class SaveInterpreter{
 		//*******
     	//fourth: lists the enumerations of all guesses by opponent
 		//comma between each ship
+		outputRows.add(this.enemyGuessString(gameGrid));
+		
+		return outputRows;
+	}
+	
+	public List<List<Integer>> convertSaveString(String saveString){
+		//Converts save string to List<List<Integer>> format.
+		List<List<Integer>> output=new ArrayList<List<Integer>>();
+		String nextNum="";
+		boolean endList=false;
+		String nextChar;
+		for(Integer charIndex=0;charIndex<saveString.length()){
+			nextChar=saveString.charAt(charIndex).toString();
+			if(nextChar!=","){
+				endList=false;
+				nextNum+=nextChar;
+			}
+			else{
+				if(endList=false){
+					endList=true;
+				}
+				else{
+					
+				}
+				
+			}
+				
+				
+		}
+		
 		
 	}
+	
+	
 	
 	
 }
