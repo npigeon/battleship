@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Ship{
-	List<Coordinates> shipLocation = new ArrayList<Coordinates>();
+	public List<Coordinates> shipLocation = new ArrayList<Coordinates>();
+	public Integer shipSize;
+	public Integer hitsTaken;
 	
 	public Ship(List<Coordinates> shipLoc){
 		for(Coordinates shipSegmentLoc:shipLoc){
