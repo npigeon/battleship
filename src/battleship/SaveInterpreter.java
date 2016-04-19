@@ -145,26 +145,43 @@ public class SaveInterpreter{
 	}
 	
 	public List<List<Integer>> convertSaveString(String saveString){
-		//Converts save string to List<List<Integer>> format.
+		//Converts save string to List<List<Integer>> format.  in save strings each integer is separated by a 
+		//comma and there are 2 commas between each sublist(double commas only occur in own fleet location data)
+		
+		
 		List<List<Integer>> output=new ArrayList<List<Integer>>();
+		List<Integer> nextList=new ArrayList<Integer>();
 		String nextNum="";
-		boolean endList=false;
-		String nextChar;
-		for(Integer charIndex=0;charIndex<saveString.length()){
-			nextChar=saveString.charAt(charIndex).toString();
-			if(nextChar!=","){
+		boolean endChar=false;
+		Character nextChar;
+		
+		for(Integer charIndex=0;charIndex<saveString.length();charIndex++){
+			if(endChar==true){  //upon reading one comma followed by non comma parses current string as Integer and 
+				nextList.add(Integer.parseInt(nextNum));//adds it to current list
+				endChar=false;
+			}
+			nextChar=saveString.charAt(charIndex);
+			if(nextChar!=','){
 				endList=false;
 				nextNum+=nextChar;
 			}
 			else{
-				if(endList=false){
-					endList=true;
+				if(endChar=false){  
+					endChar=true;
 				}
-				else{
+				else{//upon reading 2 commas in a row, parses current working string as integer, adds it to current
+					nextList.add(Integer.parseInt(nextNum));//working list, and adds that list to output list
+					endChar=false;
+					output.add(nextList);
 					
+					nextList=new ArrayList<Integer>();
 				}
 				
 			}
+			nextList.add(Integer.parseInt(nextNum));  // finalizes last entry in string which will not have commas
+			output.add(nextList);                     // following it to trigger the in-loop conditions
+			
+			return output;
 				
 				
 		}
