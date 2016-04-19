@@ -22,8 +22,4 @@ public class GridViewer {
         }
         System.out.println(boardContents);
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> origin/eclipseFriendly

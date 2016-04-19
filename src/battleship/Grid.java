@@ -7,9 +7,7 @@ import java.io.FileWriter;
 
 
 
-//<<<<<<< HEAD
-import java.util.ArrayList;
-import java.util.List;
+
 
 public class Grid {
     public List<Column> columns = new ArrayList<Column>();
@@ -51,7 +49,7 @@ public class Grid {
     }
     
 }
-=======
+
 public class Grid {
     public List<Column> columns = new ArrayList<Column>();
     private int width;
