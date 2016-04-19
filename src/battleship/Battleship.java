@@ -6,7 +6,7 @@ public class Battleship {
 
     public static void main(String args[] ) {
         viewManager.displayGrid(gameBoard);
-        
+
     }
 }
 

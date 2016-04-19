@@ -13,7 +13,7 @@ public class Ship{
 	}
 
 	public List<Coordinates> sortCoordsByX(List<Coordinates> coordList){
-		// method for ordering the coordinates in shipLocation in ascending order by horizantal/x coordinate
+		// method for ordering the coordinates in shipLocation in ascending order by horizontal/x coordinate
 		// based on merge sort recursive algorithm
 
 		int length=coordList.size(); 
@@ -132,51 +132,73 @@ public class Ship{
 	return combinedList;
 }
 	
-	
-	
 	public boolean checkValidity(){
 		//Checks that ship is actually in a contiguous straight line
-		Integer possibleCol=shipLocation.get(0).getX();
-		Integer possibleRow=shipLocation.get(0).getY();
+		
+		Integer expectedCol=shipLocation.get(0).getX();
+		Integer expectedRow=shipLocation.get(0).getY();
 		
 		
 		
 		boolean valid=true;
 		
-		this.sortCoordsByX(shipLocation);
+		List<Coordinates> sortedShipLoc=this.sortCoordsByX(shipLocation);
 		
-		for(Coordinates shipSegLoc:shipLocation){  //tests if all entries have the same solumn entry
-			if(shipSegLoc.getX()!=possibleCol){
+		  
+		
+		
+		
+		for(int segIndex=0; segIndex<sortedShipLoc.size();segIndex++){  //tests if all entries have the same  Row entry
+			                                                          //and are contiguous; breaks loops and sets valid
+			                                                          //to false if either condition violated
+			                                                          //correctly placed horizontal ships pass this test
+			
+			if(sortedShipLoc.get(segIndex).getY()!=expectedRow){ //test for same column             
 				valid=false;
 				break;
 			}
-		}
-		if (valid==true){
-			return true;
-		}
-		else{
-			valid=true;
-			self.sortByY();
-		}
-		
-		
-		
-		for(Coordinates shipSegLoc:shipLocation){
-			if((shipSegLoc.getY()!=possibleRow) ||){
-				valid=false
-				break;
+			
+			if(segIndex!=0){                      //avoids testing first entry for continuity
+				if((sortedShipLoc.get(segIndex-1).getX()+1)!=sortedShipLoc.get(segIndex).getX()){  //continuity test
+					valid=false;
+					break;
+				}
 			}
 		}
 		if (valid==true){
 			return true;
 		}
+		
+		
 		else{
-			return false;
+			valid=true;
+			sortedShipLoc=this.sortCoordsByY(shipLocation);
 		}
+		
+		
+		
+		for(int segIndex=0; segIndex<sortedShipLoc.size();segIndex++){  //same process for vertical ships
+
+
+			if(sortedShipLoc.get(segIndex).getX()!=expectedCol){ //test for same column             
+				valid=false;
+				break;
+			}
+
+			if(segIndex!=0){                      //avoids testing first entry for continuity
+				if((sortedShipLoc.get(segIndex-1).getY()+1)!=sortedShipLoc.get(segIndex).getY()){  //continuity test
+					valid=false;
+					break;
+				}
+			}
+		}
+		if (valid==true){
+			return true;
+		}
+
+
+		return false;
 	}
 
-	private void sortCoordsByX() {
-		// TODO Auto-generated method stub
-		
-	}
+	
 }
