@@ -4,22 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Ship{
-	public List<ShipSegment> shipLocation = new ArrayList<ShipSegment>();
-
-
+	List<Coordinates> shipLocation = new ArrayList<Coordinates>();
 	
-	public Ship(List<ShipSegment> shipLoc){
-		for(ShipSegment shipSegmentLoc:shipLoc){
+	public Ship(List<Coordinates> shipLoc){
+		for(Coordinates shipSegmentLoc:shipLoc){
 			shipLocation.add(shipSegmentLoc);
 		}
 	}
 
-	public List<ShipSegment> sortCoordsByX(List<ShipSegment> coordList){
+	public List<Coordinates> sortCoordsByX(List<Coordinates> coordList){
 		// method for ordering the coordinates in shipLocation in ascending order by horizontal/x coordinate
 		// based on merge sort recursive algorithm
 
 		int length=coordList.size(); 
-		List<ShipSegment> combinedList=new ArrayList<ShipSegment>(); //our output variable
+		List<Coordinates> combinedList=new ArrayList<Coordinates>(); //our output variable
 		
 		if (length==1){  //method just returns input if of length 1
 			             //important because a list of size 1 is always sorted
@@ -35,12 +33,12 @@ public class Ship{
 			//recursion used to evaluating 
 			//start from single element lists, then solve 2 element listed, then 4 and so on
 			
-			List<ShipSegment> subList1=new ArrayList<ShipSegment>(coordList.subList(0, midPoint));
-			List<ShipSegment> sortedSub1=this.sortCoordsByX(subList1);//evulates first half sublist first
+			List<Coordinates> subList1=new ArrayList<Coordinates>(coordList.subList(0, midPoint));
+			List<Coordinates> sortedSub1=this.sortCoordsByX(subList1);//evulates first half sublist first
 			
 			
-			List<ShipSegment> subList2=new ArrayList<ShipSegment>(coordList.subList(midPoint, length));
-			List<ShipSegment> sortedSub2=this.sortCoordsByX(subList2);//resursion for second half sublist
+			List<Coordinates> subList2=new ArrayList<Coordinates>(coordList.subList(midPoint, length));
+			List<Coordinates> sortedSub2=this.sortCoordsByX(subList2);//resursion for second half sublist
 			
 			
 			
@@ -78,13 +76,13 @@ public class Ship{
 
 	return combinedList;  //returns sorted version of currently evaluated sublist
 }
-	public List<ShipSegment> sortCoordsByY(List<ShipSegment> coordList){
-		// method for ordering the ShipSegments in shipLocation in ascending order by vertical/y coordinate
+	public List<Coordinates> sortCoordsByY(List<Coordinates> coordList){
+		// method for ordering the coordinates in shipLocation in ascending order by vertical/y coordinate
 		// based on merge sort recursive algorithm
 		// sortCoordinatesByX has more detailed comments on the method
 
 		int length=coordList.size();
-		List<ShipSegment> combinedList=new ArrayList<ShipSegment>();
+		List<Coordinates> combinedList=new ArrayList<Coordinates>();
 		
 		if (length==1){
 			combinedList=coordList;
@@ -95,11 +93,11 @@ public class Ship{
 			int midPoint=length/2;
 			
 			
-			List<ShipSegment> subList1=new ArrayList<ShipSegment>(coordList.subList(0, midPoint));
-			List<ShipSegment> sortedSub1=this.sortCoordsByY(subList1);
+			List<Coordinates> subList1=new ArrayList<Coordinates>(coordList.subList(0, midPoint));
+			List<Coordinates> sortedSub1=this.sortCoordsByY(subList1);
 			
-			List<ShipSegment> subList2=new ArrayList<ShipSegment>(coordList.subList(midPoint, length));
-			List<ShipSegment> sortedSub2=this.sortCoordsByY(subList2);
+			List<Coordinates> subList2=new ArrayList<Coordinates>(coordList.subList(midPoint, length));
+			List<Coordinates> sortedSub2=this.sortCoordsByY(subList2);
 
 			
 			
@@ -137,16 +135,14 @@ public class Ship{
 	public boolean checkValidity(){
 		//Checks that ship is actually in a contiguous straight line
 		
-		
-		List<ShipSegment> shipLocClone = new ArrayList<ShipSegment>(shipLocation);
-		Integer expectedCol=shipLocClone.get(0).getX();
-		Integer expectedRow=shipLocClone.get(0).getY();
+		Integer expectedCol=shipLocation.get(0).getX();
+		Integer expectedRow=shipLocation.get(0).getY();
 		
 		
 		
 		boolean valid=true;
 		
-		List<ShipSegment> sortedShipLoc=this.sortCoordsByX(shipLocClone);
+		List<Coordinates> sortedShipLoc=this.sortCoordsByX(shipLocation);
 		
 		  
 		
@@ -176,7 +172,7 @@ public class Ship{
 		
 		else{
 			valid=true;
-			sortedShipLoc=this.sortCoordsByY(shipLocClone);
+			sortedShipLoc=this.sortCoordsByY(shipLocation);
 		}
 		
 		
@@ -205,14 +201,4 @@ public class Ship{
 	}
 
 	
-	public boolean isHit(Coordinates guess){
-		String guessString=guess.getCoordsAsString();
-		for(ShipSegment shipSegmentCoords:shipLocation){
-			
-			if(guess==shipSegmentCoords){
-				return true;
-			}
-		}
-		return false;
-	}
 }
