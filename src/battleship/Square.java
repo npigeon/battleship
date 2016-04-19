@@ -4,8 +4,14 @@ public class Square {
     private boolean occupiedByOpponent;
     private boolean occupiedBySelf;
     private boolean playerHasFiredAt;
-    private boolean enemyhasFiredAt;
+    private boolean enemyHasFiredAt;
     
+    public void Square(){
+    	occupiedByOpponent=false;
+    	occupiedBySelf=false;
+    	playerHasFiredAt=false;
+    	enemyHasFiredAt=false;
+    }
     public Integer getGuessMult(){
     	//simple function for grabbing data on whether guesses hit or missed
     	//for creating the save file
@@ -21,13 +27,20 @@ public class Square {
     		return -1;   //returns 1 if player has fired on this location and missed
     	}
     }
-    
-    public char getDisplayCharacter () {
-<<<<<<< HEAD
-    	
-=======
-
->>>>>>> origin/eclipseFriendly
-        return 'o';
+    public boolean checkForOwnShip(){
+    	return occupiedBySelf;
     }
+    public boolean checkForShot(){
+    	return playerHasFiredAt;
+    }
+    public boolean checkForHit(){
+    	return occupiedByOpponent;
+    }
+    public boolean checkForEnemyShot(){
+    	return enemyHasFiredAt;
+    }
+    
+    
 }
+    
+

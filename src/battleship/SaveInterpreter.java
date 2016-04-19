@@ -37,6 +37,7 @@ public class SaveInterpreter{
     }
 	
 	
+	
     public Coordinates enumerateSquare(int enumeration){
     	//converts enumeration back to x & y coorrdinates and returns an arraylist of those coodinates
     	//reverse operation of the first definition of this method
@@ -97,6 +98,16 @@ public class SaveInterpreter{
 		}
 		return fleetString.substring(0, fleetString.length()-2);
     	
+    }
+    
+    public String enemyGuessString(Grid gameGrid){
+    	for(Integer squareY=0;squareY<gridHeight;squareY++){
+    		for(Integer squareX=1;squareX<gridWidth;squareX++){
+    			if(gameGrid.getSquare(squareX, squareY).){
+    				
+    			}
+    		}
+    	}
     }
     
 	public void formatSave(Grid gameGrid, List<Ship> ownFleet){
