@@ -16,11 +16,11 @@ public class Grid {
     private int width;
     private int height;
     
-    public Grid(int gridSize) {
-        width = gridSize;
-        height = gridSize;
-        for(int squareX=0; squareX<gridSize; squareX++) {
-            columns.add(new Column(gridSize));
+    public Grid(int gridWidth, int gridHeight) {
+        width = gridWidth;
+        height = gridHeight;
+        for(int squareX=0; squareX<gridWidth; squareX++) {
+            columns.add(new Column(gridHeight));
         }
     }
     public Square getSquare(int x, int y){
